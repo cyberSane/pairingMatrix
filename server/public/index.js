@@ -57,7 +57,7 @@ function showPairingMatrix(indivisuals, pairData, committers) {
 function getNumberOfCommitsOf(person, indivisuals) {
 	var commits = 0;
 	indivisuals.forEach(function(indivisual) {
-		if(indivisual.pair[0] == person)
+		if(indivisual.pair[0].toLowerCase() == person.toLowerCase())
 			commits = indivisual.commits;
 	});
 	return commits;
@@ -66,7 +66,7 @@ function getNumberOfCommitsOf(person, indivisuals) {
 function getIndexOf(name, committers) {
 	var index = 0;
 	committers.forEach(function(committer, i) {
-		if(committer == name) index = i
+		if(committer.toLowerCase() == name.toLowerCase()) index = i
 	})
 	return index;
 }
