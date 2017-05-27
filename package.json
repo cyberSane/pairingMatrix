@@ -24,6 +24,7 @@
     "mocha": "^3.4.2"
   },
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "lodash": "^4.17.4",
     "shelljs": "^0.7.7"

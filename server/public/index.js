@@ -78,12 +78,25 @@ function getCoordinate(name, committers) {
 			y: circumferenceRadius * Math.cos(angle * (index))};
 }
 
+function setWeeks() {
+	for (var i = 1; i <= 10; i++) {
+		$('#weeks').append($('<option />').val(i).html(i))
+	}
+}
+
+function show() {
+	var weeks = $('#weeks')[0].value
+	$('.chartArea')[0].innerHTML = "";
+	$.post('commits', { weeks: weeks }, function(res) {
+		showPairingMatrix(res.indivisuals, res.validPairs, res.committers);
+	})
+}
+
 $(document).ready(function() {
 
-	$('#visualizeButton').click(function() {
-		$.get('commits', function(res) {
-			showPairingMatrix(res.indivisuals, res.validPairs, res.committers);
-		})
-	})	
-})
+	setWeeks();
 
+	$.post('commits', {weeks: '1'}, function(res) {
+		showPairingMatrix(res.indivisuals, res.validPairs, res.committers);
+	});
+})
