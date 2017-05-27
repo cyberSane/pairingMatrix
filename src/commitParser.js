@@ -42,7 +42,10 @@ function validPairs(pairs) {
 }
 
 function getAllCommitters(pairs) {
-	return _.uniq(_.flatten(pairs));
+	var lowerCasedPairs = _.flatten(pairs).map(function(indivisual) {
+		return indivisual.toLowerCase();
+	})
+	return _.uniq(lowerCasedPairs);
 }
 
 function getCommittersWithCommits(pairs) {
