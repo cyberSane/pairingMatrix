@@ -1,0 +1,18 @@
+.circumference {
+	fill: linen;
+	x: 300px;
+	y:250px;
+	r:300px;
+	fill-opacity: 0.5;
+}
+
+.indivisual {
+	r: 20px;
+	fill-opacity: 0.5;
+}
+
+.connection {
+	fill:none;
+	stroke: steelblue;
+	
+}
