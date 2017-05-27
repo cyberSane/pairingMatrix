@@ -3,16 +3,12 @@ var CommitsFetcher = require('../../lib/commitFetcher');
 
 describe('commitsFetcher', function() {
 
-	it('should call the callBack provided as it gets commits', function() {
+	it('should fetch the git commits', function() {
 		var commitsFetcher = new CommitsFetcher();
-		var callbackCalled = false;
+		var commits = commitsFetcher.fetch();
 
-		var callback = function(commits) {
-			callbackCalled = true;
-		}
-
-		commitsFetcher.fetch(callback);
-		assert.equal(callbackCalled, true);
+		assert.ok(commits.length > 1);
+		assert.equal(commits[commits.length - 1], '619e821 Initial commit');
 	});
 
 })
