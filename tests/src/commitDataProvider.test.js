@@ -1,5 +1,5 @@
 var assert = require('assert');
-var DataProvider = require('../../lib/commitDataProvider');
+var DataProvider = require('../../src/commitDataProvider');
 
 describe('github data provider', function() {
 

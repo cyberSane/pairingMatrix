@@ -1,5 +1,5 @@
 var assert = require('assert');
-var CommitsFetcher = require('../../lib/commitFetcher');
+var CommitsFetcher = require('../../src/commitFetcher');
 
 describe('commitsFetcher', function() {
 

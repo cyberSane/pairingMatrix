@@ -1,5 +1,5 @@
 var assert = require('assert');
-var CommitsParser = require('../../lib/commitParser');
+var CommitsParser = require('../../src/commitParser');
 
 function contains(element, elements) {
 	return elements.indexOf(element) >= 0;
