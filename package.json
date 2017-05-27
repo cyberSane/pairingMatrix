@@ -4,7 +4,8 @@
   "description": "A Module to visualize team's pairing style",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/*"
+    "test": "mocha tests/*",
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
     "mocha": "^3.4.2"
   },
   "dependencies": {
+    "express": "^4.15.3",
     "shelljs": "^0.7.7"
   }
 }
