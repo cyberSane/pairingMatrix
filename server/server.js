@@ -1,4 +1,6 @@
+#!/usr/bin/env node
 var express = require('express');
+
 var app = express();
 var CommitProvider = require('../src/commitDataProvider');
 var CommitFetcher = require('../src/commitFetcher');

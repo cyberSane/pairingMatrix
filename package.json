@@ -7,6 +7,9 @@
     "test": "mocha tests/*",
     "start": "node server/server.js"
   },
+  "bin": {
+    "pairing-matrix": "./server/server.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/abhikur/pairingMatrix.git"
