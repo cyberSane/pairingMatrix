@@ -1,5 +1,5 @@
 var assert = require('assert');
-var DataProvider = require('../../src/commitDataProvider');
+var CommitDataProvider = require('../../src/commitDataProvider');
 
 describe('github data provider', function() {
 
@@ -19,13 +19,13 @@ describe('github data provider', function() {
 	it('should get commits data', function() {
 
 		var regex = /\|\w*\/\w*\||\|\w*\|/gi;
-		var dataProvider = new DataProvider(dataFetcher, regex);
+		var commitDataProvider = new CommitDataProvider(dataFetcher, regex);
 
-		var data = dataProvider.provideData();
+		var data = commitDataProvider.provideData();
 
-		assert.equal(data.indivisuals.length, 1);
-		assert.equal(data.indivisuals[0].pair[0], 'Abhishek')
-		assert.equal(data.indivisuals[0].commits, 2)
+		assert.equal(data.individuals.length, 1);
+		assert.equal(data.individuals[0].pair[0], 'Abhishek')
+		assert.equal(data.individuals[0].commits, 2)
 
 		assert.equal(data.validPairs.length, 1)
 		assert.equal(data.validPairs[0].pair[0], 'Abhishek')

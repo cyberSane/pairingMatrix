@@ -28,20 +28,18 @@ describe('commitsParser', function() {
 		assert.equal('Abhi', allPairs[2][0])	
 	});
 
-	it('should get indivisuals with commits', function() {
-		var regex = /\[\w*\/\w*\]|\[\w*\]/gi;
-		var commitsParser = new CommitsParser(regex);
+	it('should get individuals with commits', function() {
+		var commitsParser = new CommitsParser(regexp);
 		var parsedData = commitsParser.parse(messages);
 
-		assert.equal(parsedData.indivisuals.length, 1);
-		assert.equal(parsedData.indivisuals[0].pair.length, 1)
-		assert.equal(parsedData.indivisuals[0].commits, 1)
-		assert.equal(parsedData.indivisuals[0].pair[0], 'Abhikur');
+		assert.equal(parsedData.individuals.length, 1);
+		assert.equal(parsedData.individuals[0].pair.length, 1)
+		assert.equal(parsedData.individuals[0].commits, 1)
+		assert.equal(parsedData.individuals[0].pair[0], 'Abhikur');
 	});
 
 	it('should get only valid pairs along with total number of commits', function() {
-		var regex = /\[\w*\/\w*\]|\[\w*\]/gi;
-		var commitsParser = new CommitsParser(regex);
+		var commitsParser = new CommitsParser(regexp);
 		var validPairs = commitsParser.parse(messages).validPairs;
 
 		assert.equal(validPairs[0].pair[0], 'Abhikur')

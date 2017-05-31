@@ -7,7 +7,7 @@ function CommitsParser(regex) {
 CommitsParser.prototype.parse = function(messages) {
 	var pairs = this.getPairs(messages);
 	return {
-		indivisuals: getIndivisuals(pairs),
+		individuals: getIndividuals(pairs),
 		validPairs: parseCommitPairsWithTotalCommits(pairs),
 		committers: getAllCommitters(pairs)
 	}
@@ -30,9 +30,9 @@ function extractString(regex, msg) {
 	return (match) ? match[0].substring(1, match[0].length -1) : match;
 }
 
-function getIndivisuals(pairs) {
-	var indivisuals = pairs.filter(function(pair) {return pair.length == 1})
-	return getCommittersWithCommits(indivisuals);
+function getIndividuals(pairs) {
+	var individuals = pairs.filter(function(pair) {return pair.length == 1})
+	return getCommittersWithCommits(individuals);
 }
 
 function validPairs(pairs) {

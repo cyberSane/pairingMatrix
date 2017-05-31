@@ -5,12 +5,12 @@ var degreeFactor = 180 / Math.PI;
 var circumferenceRadius = 300;
 var colors = d3.scaleOrdinal(d3.schemeCategory20);
 
-var indivisualCommitScale = d3.scaleLinear()
+var individualCommitScale = d3.scaleLinear()
 	.domain([0, 30])
 	.range([0, 10]);
 
-function showPairingMatrix(indivisuals, pairData, committers) {
-	var svg = d3.selectAll(".container").append("svg")
+function showPairingMatrix(individuals, pairData, committers) {
+	var svg = d3.selectAll(".chartArea").append("svg")
 		.attr("height", Height)
 		.attr("width", Width)
 
@@ -29,19 +29,20 @@ function showPairingMatrix(indivisuals, pairData, committers) {
 			return "M " + getCoordinate(d.pair[0], committers).x + " " + getCoordinate(d.pair[0], committers).y + " Q 0 -20 " +
                     getCoordinate(d.pair[1], committers).x + " " + getCoordinate(d.pair[1], committers).y;
 		})
-		.attr("stroke-width", function(d) {return indivisualCommitScale(d.commits)})
+		.attr("stroke-width", function(d) {return individualCommitScale(d.commits)})
 		
-	var devs = matrixGroup.selectAll(".indivisual")
+	var devs = matrixGroup.selectAll(".individual")
 		.data(committers)
 		.enter()
 		.append("circle")
 		.attr("cx", function(d, i) { return getCoordinate(d, committers).x})
 		.attr("cy", function(d, i) { return getCoordinate(d, committers).y})
-		.attr("class", "indivisual")
+		.attr("class", "individual")
+		.attr("id", function(d) {return d})
 		.attr("fill", colors)
 		.attr("stroke", "red")
 		.attr("stroke-width", function(d) {
-			return indivisualCommitScale(getNumberOfCommitsOf(d, indivisuals))
+			return individualCommitScale(getNumberOfCommitsOf(d, individuals))
 		})
 
 	matrixGroup.selectAll("text")
@@ -56,9 +57,9 @@ function showPairingMatrix(indivisuals, pairData, committers) {
 
 function getNumberOfCommitsOf(person, indivisuals) {
 	var commits = 0;
-	indivisuals.forEach(function(indivisual) {
-		if(indivisual.pair[0].toLowerCase() == person.toLowerCase())
-			commits = indivisual.commits;
+	individuals.forEach(function(individual) {
+		if(individual.pair[0].toLowerCase() == person.toLowerCase())
+			commits = individual.commits;
 	});
 	return commits;
 }
@@ -85,10 +86,10 @@ function setWeeks() {
 }
 
 function show() {
-	var weeks = $('#weeks')[0].value
+	var weeks = $('#weeks')[0].value + ' weeks ago';
 	$('.chartArea')[0].innerHTML = "";
 	$.post('commits', { weeks: weeks }, function(res) {
-		showPairingMatrix(res.indivisuals, res.validPairs, res.committers);
+		showPairingMatrix(res.individuals, res.validPairs, res.committers);
 	})
 }
 
@@ -96,7 +97,7 @@ $(document).ready(function() {
 
 	setWeeks();
 
-	$.post('commits', {weeks: '1'}, function(res) {
-		showPairingMatrix(res.indivisuals, res.validPairs, res.committers);
+	$.post('commits', {weeks: '1 weeks ago'}, function(res) {
+		showPairingMatrix(res.individuals, res.validPairs, res.committers);
 	});
 })
