@@ -32,7 +32,7 @@
 
 ### Now goto your git project folder and run,
 
-`pairing-matrix`
+`$ pairing-matrix`
 
 _Now you will see a server running on port 3000. Goto browser and hit localhost:3000_
 
