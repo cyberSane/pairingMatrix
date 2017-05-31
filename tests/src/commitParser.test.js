@@ -7,20 +7,20 @@ function contains(element, elements) {
 
 describe('commitsParser', function() {
 
-	var messages = [];
+	var messages = [],
+		regexp = /\|([\w]*)(?:\/)?([\w]*)\|/gi;
 
 	before(function() {
 		messages = [
-					'b3e567y [Abhikur]: first commit',
-					'4ega564 [Abhikur/Abhishek]: second message',
-					'2e67s88 [Abhi/Abhishek]: third commit',
-					'3b342d4 [Abhi/Abhishek]: fourth commit'
+					'b3e567y |Abhikur|: first commit',
+					'4ega564 |Abhikur/Abhishek|: second message',
+					'2e67s88 |Abhi/Abhishek|: third commit',
+					'3b342d4 |Abhi/Abhishek|: fourth commit'
 					];
 	})
 
 	it('should get all the pairs including non valid', function() {
-		var regex = /\[\w*\/\w*\]|\[\w*\]/gi;
-		var commitsParser = new CommitsParser(regex);
+		var commitsParser = new CommitsParser(regexp);
 		var allPairs = commitsParser.getPairs(messages);
 
 		assert.equal('Abhikur', allPairs[0][0])
@@ -51,14 +51,12 @@ describe('commitsParser', function() {
 	});
 
 	it('should get all committers in the repo', function() {
-		var regex = /\[\w*\/\w*\]|\[\w*\]/gi;
-		var commitsParser = new CommitsParser(regex);
+		var commitsParser = new CommitsParser(regexp);
 		var committers = commitsParser.parse(messages).committers;
-
 		assert.equal(committers.length, 3);
-		assert.ok(contains('Abhikur', committers));		
-		assert.ok(contains('Abhi', committers));		
-		assert.ok(contains('Abhishek', committers));		
+		assert.ok(contains('abhikur', committers));		
+		assert.ok(contains('abhi', committers));		
+		assert.ok(contains('abhishek', committers));		
 	})
 
 })
