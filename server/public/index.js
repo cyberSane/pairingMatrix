@@ -25,6 +25,9 @@ function showPairingMatrix(individuals, pairData, committers) {
 		.enter()
 		.append("path")
 		.attr("class", "connection")
+		.attr("id", function(d) {
+			return d.pair.join('_')
+		})
 		.attr("d", function(d) {
 			return "M " + getCoordinate(d.pair[0], committers).x + " " + getCoordinate(d.pair[0], committers).y + " Q 0 -20 " +
                     getCoordinate(d.pair[1], committers).x + " " + getCoordinate(d.pair[1], committers).y;
@@ -44,18 +47,55 @@ function showPairingMatrix(individuals, pairData, committers) {
 		.attr("stroke-width", function(d) {
 			return individualCommitScale(getNumberOfCommitsOf(d, individuals))
 		})
+		.attr('id', function(d) {return d})
+		.on('mouseover', function(id) {mouseOver(id, individuals, pairData)})
+		.on('mouseout', function(id) {mouseOut(id, individuals, pairData)})
 
 	matrixGroup.selectAll("text")
 		.data(committers).enter()
 		.append("text")
-		.attr("x", function(d, i) { return getCoordinate(d, committers).x})
-		.attr("y", function(d, i) { return getCoordinate(d, committers).y})
+		.attr("x", function(d, i) { return getCoordinate(d, committers).x - 29 + 'px'})
+		.attr("y", function(d, i) { return getCoordinate(d, committers).y + 35 + 'px'})
 		.text(function(d){ return d})
 		.attr("fill", "black")
 
 }
 
-function getNumberOfCommitsOf(person, indivisuals) {
+function getAllPairsContaining(name, pairDataArray) {
+	return pairDataArray.filter(function(pairData) {
+		var pairedPeople = pairData.pair.map(function(person){return person.toLowerCase()})
+		return pairedPeople.indexOf(name) >= 0
+	})
+};
+
+function toggleClass(newClass, pair) {
+    for(ii = 0; ii < 2; ii++) {
+        d3.selectAll($("#" + pair[ii].toLowerCase()))
+            .attr("class", newClass)    
+    }
+}
+
+function mouseOut(id, individuals, pairData) {
+    var pairedPeople = getAllPairsContaining(id, pairData);
+    pairedPeople.forEach(function(pairedPerson) {
+        toggleClass("individual", pairedPerson.pair);
+        var pairId = pairedPerson.pair.join('_');
+        d3.selectAll($("#" + pairId))
+        .attr("class", "connection")
+    })
+}
+
+function mouseOver(id, individuals, pairData) {
+    var pairedPeople = getAllPairsContaining(id, pairData);
+    pairedPeople.forEach(function(pairedPerson) {
+        toggleClass("individualLarge", pairedPerson.pair)
+        var pairId = pairedPerson.pair.join('_');
+        d3.selectAll($("#" + pairId))
+        .attr("class", "connectionLarge")
+    })
+}
+
+function getNumberOfCommitsOf(person, individuals) {
 	var commits = 0;
 	individuals.forEach(function(individual) {
 		if(individual.pair[0].toLowerCase() == person.toLowerCase())

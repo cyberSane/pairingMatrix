@@ -52,7 +52,7 @@
 	fill-opacity: 0.5;
 }
 
-.indivisual {
+.individual {
 	r: 20px;
 	fill-opacity: 0.5;
 }
@@ -60,5 +60,14 @@
 .connection {
 	fill:none;
 	stroke: steelblue;
-	
+}
+
+.individualLarge {
+	r: 30px;
+	fill-opacity: 0.5;
+}
+
+.connectionLarge {
+	fill:none;
+	stroke: red;
 }
