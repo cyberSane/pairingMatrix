@@ -1,6 +1,8 @@
 # pairingMatrix
 [![Build Status](https://travis-ci.org/SARAN-thala/pairingMatrix.svg?branch=master)](https://travis-ci.org/SARAN-thala/pairingMatrix)  [![npm](https://img.shields.io/npm/v/npm.svg)]()
 
+[![NPM](https://nodei.co/npm/pairing-matrix.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pairing-matrix/)
+
 <img src="/images/pairingMatrix.jpeg" width="500" height="500" />
 
 ## What is pairing-matrix
