@@ -13,7 +13,7 @@ app.use(express.static(__dirname + '/lib'))
 app.post('/commits', function(req, res) {
 	var config = {regexp: /\|([\w]*)(?:\/)?([\w]*)\|/gi};
 	try {
-		config = yml.safeLoad(fs.readFileSync('/config.yml', 'utf8'))
+		config = yml.safeLoad(fs.readFileSync('config.yml', 'utf8'))
 	} catch (e) {
 		console.log(e.message)
 		console.log("Using default regexp - |story#|Pair1/Pair2| message");
