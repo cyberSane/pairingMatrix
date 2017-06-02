@@ -1,73 +1,70 @@
 .header {
-	text-align: left;
-  	height: 60px;
-	line-height: 60px;
-	color: white;
-	background-color: #3e3e3e;
-	margin: 0 0 0 0;
+    text-align: left;
+    height: 60px;
+    line-height: 60px;
+    color: white;
+    background-color: #3e3e3e;
+    margin: 0 0 0 0;
 }
 
 .container {
-	margin-left: 15%;
-	margin-right: 15%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 #weekText {
-	margin-bottom: 0px;
-	display: inline-block;
+    margin-bottom: 0;
+    display: inline-block;
 }
 
 .container #weeks {
-	font-size: inherit;
+    font-size: inherit;
 }
 
 .container #show {
-	display: inline;
-	height: inherit;
-	background-color: white;
-	border: solid 1px;
-	height: 30px;
-	width: 70px;
-	cursor: pointer;
+    display: inline;
+    height: inherit;
+    background-color: white;
+    border: solid 1px;
+    width: 70px;
+    cursor: pointer;
 }
 
 .container #show:focus {
-	outline: none;
+    outline: none;
 }
-
-
 
 .header h1 {
     display: inline;
     font-size: 30px;
     font-weight: 400;
     padding-left: 20px;
- }
+}
 
 .circumference {
-	fill: linen;
-	x: 300px;
-	y:250px;
-	r:300px;
-	fill-opacity: 0.5;
+    fill: linen;
+    x: 300px;
+    y: 250px;
+    r: 300px;
+    fill-opacity: 0.5;
 }
 
 .individual {
-	r: 20px;
-	fill-opacity: 0.5;
+    r: 20px;
+    fill-opacity: 0.5;
 }
 
 .connection {
-	fill:none;
-	stroke: steelblue;
+    fill: none;
+    stroke: steelblue;
 }
 
 .individualLarge {
-	r: 30px;
-	fill-opacity: 0.5;
+    r: 30px;
+    fill-opacity: 0.5;
 }
 
 .connectionLarge {
-	fill:none;
-	stroke: red;
+    fill: none;
+    stroke: red;
 }

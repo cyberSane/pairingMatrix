@@ -1,10 +1,14 @@
-#!/usr/bin/env node
+const express = require('express');
+const router = require('./router');
+const app = express();
 
-var http = require('http');
-var router = require('./router');
-var server = http.createServer(router);
+require('./router')(app);
 
-server.listen(3000, (err) => {
-    if(err) return console.log('Something went wrong while booting server');
-    console.log('listening at 3000..');
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, 'localhost', (err) => {
+  if (err) {
+    console.log('Something went wrong while booting server :(')
+  }
+  console.log(`Server listening at ${PORT}`)
 });
