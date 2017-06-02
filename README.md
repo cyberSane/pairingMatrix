@@ -1,5 +1,5 @@
 # pairingMatrix
-[![Build Status](https://travis-ci.org/SARAN-thala/pairingMatrix.svg?branch=master)](https://travis-ci.org/SARAN-thala/pairingMatrix)  [![npm](https://img.shields.io/npm/v/npm.svg)]() [![Code Climate](https://codeclimate.com/github/SARAN-thala/pairingMatrix/badges/gpa.svg)](https://codeclimate.com/github/SARAN-thala/pairingMatrix) 
+[![Build Status](https://travis-ci.org/SARAN-thala/pairingMatrix.svg?branch=Implement-in-es6)](https://travis-ci.org/SARAN-thala/pairingMatrix)  [![npm](https://img.shields.io/npm/v/npm.svg)]() [![Code Climate](https://codeclimate.com/github/SARAN-thala/pairingMatrix/badges/gpa.svg)](https://codeclimate.com/github/SARAN-thala/pairingMatrix) 
 
 [![NPM](https://nodei.co/npm/pairing-matrix.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pairing-matrix/)
 
