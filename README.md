@@ -1,5 +1,5 @@
 # pairingMatrix
-[![Build Status](https://travis-ci.org/SARAN-thala/pairingMatrix.svg?branch=master)](https://travis-ci.org/SARAN-thala/pairingMatrix)
+[![Build Status](https://travis-ci.org/SARAN-thala/pairingMatrix.svg?branch=master)](https://travis-ci.org/SARAN-thala/pairingMatrix)  [![npm](https://img.shields.io/npm/v/npm.svg)]()
 
 <img src="/images/pairingMatrix.jpeg" width="500" height="500" />
 
