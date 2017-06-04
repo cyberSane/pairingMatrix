@@ -15,25 +15,25 @@ class CommitsParser {
   }
 
   getPairs(messages) {
-    var pairs = messages.map(extractString.bind(null, this.regex)).filter(Boolean);
+    const pairs = messages.map(extractString.bind(null, this.regex)).filter(Boolean);
     return pairs.map(function (pair) {
       return pair.split('/');
     });
   }
 }
 
-function parseCommitPairsWithTotalCommits(pairs) {
-  var pairs = validPairs(pairs);
+function parseCommitPairsWithTotalCommits(pair) {
+  const pairs = validPairs(pair);
   return getCommittersWithCommits(pairs);
 }
 
 function extractString(regex, msg) {
-  var match = msg.match(regex);
+  const match = msg.match(regex);
   return (match) ? match[0].substring(1, match[0].length - 1) : match;
 }
 
 function getIndividuals(pairs) {
-  var individuals = pairs.filter(function (pair) {
+  const individuals = pairs.filter(function (pair) {
     return pair.length === 1
   });
   return getCommittersWithCommits(individuals);
@@ -46,14 +46,14 @@ function validPairs(pairs) {
 }
 
 function getAllCommitters(pairs) {
-  var lowerCasedPairs = _.flatten(pairs).map(function (indivisual) {
+  const lowerCasedPairs = _.flatten(pairs).map(function (indivisual) {
     return indivisual.toLowerCase();
   });
   return _.uniq(lowerCasedPairs);
 }
 
 function getCommittersWithCommits(pairs) {
-  var pairingData = {};
+  const pairingData = {};
   pairs.forEach(function (pair) {
     if (pairingData[JSON.stringify(pair)])
       pairingData[JSON.stringify(pair)]++;

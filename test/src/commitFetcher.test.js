@@ -4,7 +4,7 @@ const CommitsFetcher = require('../../src/commitFetcher');
 describe('commitsFetcher', () => {
 
   it('should fetch the git commits', () => {
-    const since = '1 weeks ago';
+    const since = '5 weeks ago';
     const commitsFetcher = new CommitsFetcher(since);
     const commits = commitsFetcher.fetch();
     assert.ok(commits.length > 1);
