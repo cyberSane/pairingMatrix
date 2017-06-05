@@ -1,14 +1,16 @@
-var shell = require('shelljs');
+const shell = require('shelljs');
 
-function CommitFetcher(since) {
-	this.since = since;
-}
+class CommitFetcher {
+  constructor(since) {
+    this.since = since;
+  }
 
-CommitFetcher.prototype.fetch = function() {
-	var commitsString = shell.exec("git log --oneline --since='" + this.since + "'", {silent: true}).stdout;
-	var commits = commitsString.split('\n');
-	commits.pop();
-	return commits;
+  fetch() {
+    const commitsString = shell.exec("git log --oneline --since='" + this.since + "'", {silent: true}).stdout;
+    const commits = commitsString.split('\n');
+    commits.pop();
+    return commits;
+  }
 }
 
 module.exports = CommitFetcher;
