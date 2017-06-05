@@ -42,7 +42,9 @@
 
 `$ pairing-matrix`
 
-_Now you will see a server running on port 3000. Goto browser and hit localhost:3000_
+_Now you will see a server running on port 3000. Goto browser and hit localhost:3000._
+_If you want to provide a port for the server, export a env variable(PORT) as_
+`$ export PORT=somePort`
 
 > In browser there is an option to choose weeks. By that you can configure the matrix to show data for those many weeks.
 
