@@ -25,6 +25,8 @@
 * Provide a regexp of your git commit messages in a file named config.yml
 * There is a default regexp in case you do not provide any config file.
   Default regexp matches messages in this format- |story#|Pair1/Pair2| message
+* You can also specify individual names which you want to filter out from your pairing matrix
+  (Note: Useful in case when refactor/fix commit in the same regex format)
  
 ```
   cd /to your project folder
@@ -36,6 +38,10 @@
   
   /* There is a default regexp. In case, you don't create config.yml file then
      |pair1/pair2| format will be used to match the commit pairs. */
+     
+  // To exclude pair specify name in array inside the config.yml file.
+  //For example,
+  excludedPairs: ['Refactor', 'Fix']
 ```
 
 ### Now goto your git project folder and run,
