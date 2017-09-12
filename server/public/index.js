@@ -4,6 +4,7 @@ var margin = 100;
 var degreeFactor = 180 / Math.PI;
 var circumferenceRadius = 300;
 var colors = d3.scaleOrdinal(d3.schemeCategory20);
+const INDIVIDUAL_NAME_PREFIX = 'name_'
 
 var individualCommitScale = d3.scaleLinear()
   .domain([0, 30])
@@ -68,6 +69,7 @@ function showPairingMatrix(individuals, pairData, committers) {
   matrixGroup.selectAll("text")
     .data(committers).enter()
     .append("text")
+    .attr('id', function(d){return INDIVIDUAL_NAME_PREFIX+d})
     .attr("x", function (d, i) {
       return getCoordinate(d, committers).x - 29 + 'px'
     })
@@ -78,7 +80,6 @@ function showPairingMatrix(individuals, pairData, committers) {
       return d
     })
     .attr("fill", "black")
-
 }
 
 function getAllPairsContaining(name, pairDataArray) {
@@ -98,23 +99,62 @@ function toggleClass(newClass, pair) {
 }
 
 function mouseOut(id, individuals, pairData) {
-  var pairedPeople = getAllPairsContaining(id, pairData);
-  pairedPeople.forEach(function (pairedPerson) {
-    toggleClass("individual", pairedPerson.pair);
-    var pairId = pairedPerson.pair.join('_');
-    d3.selectAll($("#" + pairId))
-      .attr("class", "connection")
-  })
-}
+    var pairedPeople = getAllPairsContaining(id, pairData);
+    pairedPeople.forEach(function(pairedPerson) {
+        toggleClass("individual", pairedPerson.pair);
+        removeCommitCountWithPair(pairedPerson, id);
+        var pairId = pairedPerson.pair.join('_');
+        d3.selectAll($("#" + pairId))
+        .attr("class", "connection")
+    });
+    removeIndividualCommitCount(id, individuals);
+};
 
 function mouseOver(id, individuals, pairData) {
-  var pairedPeople = getAllPairsContaining(id, pairData);
-  pairedPeople.forEach(function (pairedPerson) {
-    toggleClass("individualLarge", pairedPerson.pair)
-    var pairId = pairedPerson.pair.join('_');
-    d3.selectAll($("#" + pairId))
-      .attr("class", "connectionLarge")
-  })
+    var pairedPeople = getAllPairsContaining(id, pairData);
+    pairedPeople.forEach(function(pairedPerson) {
+        toggleClass("individualLarge", pairedPerson.pair)
+        showCommitCountWithPair(pairedPerson, id, individuals);
+        var pairId = pairedPerson.pair.join('_');
+        d3.selectAll($("#" + pairId))
+        .attr("class", "connectionLarge")
+    });
+    showIndividualCommitCount(id, individuals);
+};
+
+function showIndividualCommitCount(id, individuals) {
+	d3.selectAll($("#"+ INDIVIDUAL_NAME_PREFIX + id)).text(id +": " + 0);
+	individuals.forEach(function(individual){
+		if(individual.pair[0].toLowerCase() == id) {
+			d3.selectAll($("#" + INDIVIDUAL_NAME_PREFIX + id)).text(id +": " + individual.commits);
+		}
+	});
+};
+
+function removeIndividualCommitCount(id, individuals) {
+	d3.selectAll($("#"+ INDIVIDUAL_NAME_PREFIX + id)).text(id);
+};
+
+function removeCommitCountWithPair(pairedPerson, id, individuals) {
+	var pair = pairedPerson.pair;
+	var otherPerson;
+	if(pair[0].toLowerCase() == id) {
+		otherPerson = pair[1].toLowerCase();
+	} else {
+		otherPerson = pair[0].toLowerCase();
+	};
+	d3.selectAll($("#" + INDIVIDUAL_NAME_PREFIX + otherPerson)).text(otherPerson)
+}
+
+function showCommitCountWithPair(pairedPerson, id, individuals) {
+	var pair = pairedPerson.pair;
+	var otherPerson;
+	if(pair[0].toLowerCase() == id) {
+		otherPerson = pair[1].toLowerCase();
+	} else {
+		otherPerson = pair[0].toLowerCase();
+	};
+	d3.selectAll($("#" + INDIVIDUAL_NAME_PREFIX + otherPerson)).text(otherPerson + ": " + pairedPerson.commits)
 }
 
 function getNumberOfCommitsOf(person, individuals) {
