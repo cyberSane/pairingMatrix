@@ -1,8 +1,9 @@
 const _ = require('lodash');
 
 class CommitsParser {
-  constructor(regex) {
+  constructor(regex, excludedPairs=[]) {
     this.regex = regex;
+    this.excludedPairs = excludedPairs;
   }
 
   parse(messages) {
@@ -16,9 +17,11 @@ class CommitsParser {
 
   getPairs(messages) {
     const pairs = messages.map(extractString.bind(null, this.regex)).filter(Boolean);
-    return pairs.map(function (pair) {
-      return pair.split('/');
-    });
+    const excludedPairs = this.excludedPairs;
+    return _.reject(pairs.map(function(unformattedPair) {
+      const pair = unformattedPair.split('/');
+      return _.difference(pair, excludedPairs)
+    }), _.isEmpty);
   }
 }
 

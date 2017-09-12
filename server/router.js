@@ -10,20 +10,22 @@ module.exports = (app) => {
   app.use(express.static(__dirname + '/public'));
   app.use(express.static(__dirname + '/lib'));
 
-  app.post('/commits', function (req, res) {
-    let config = {
-      regexp: /\|([\w]*)(?:\/)?([\w]*)\|/gi
-    };
-    try {
-      config = yml.safeLoad(fs.readFileSync('config.yml', 'utf8'))
-    } catch (err) {
-      console.log(err.message);
-      console.log("Using default regexp - |story#|Pair1/Pair2| message");
-    }
-    const weeks = req.body.weeks;
-    const commitFetcher = new CommitFetcher(weeks);
-    const commitProvider = new CommitProvider(commitFetcher, config.regexp);
-    const commitData = commitProvider.provideData();
-    res.send(commitData);
-  });
+	app.post('/commits', function(req, res) {
+		let config = {
+			regexp: /\|([\w]*)(?:\/)?([\w]*)\|/gi,
+			excludedPairs: []
+		};
+		try {
+			config = yml.safeLoad(fs.readFileSync('config.yml', 'utf8'))
+		} catch (e) {
+			console.log(e.message)
+			console.log("Using default regexp - |story#|Pair1/Pair2| message");
+		}
+		const weeks = req.body.weeks;
+		const commitFetcher = new CommitFetcher(weeks);
+		const commitProvider = new CommitProvider(commitFetcher, config.regexp, config.excludedPairs);
+		const commitData = commitProvider.provideData();
+		console.log(commitData);
+		res.send(commitData);
+	})
 };
