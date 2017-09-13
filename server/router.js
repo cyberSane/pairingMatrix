@@ -25,7 +25,6 @@ module.exports = (app) => {
 		const commitFetcher = new CommitFetcher(weeks);
 		const commitProvider = new CommitProvider(commitFetcher, config.regexp, config.excludedPairs);
 		const commitData = commitProvider.provideData();
-		console.log(commitData);
 		res.send(commitData);
 	})
 };
